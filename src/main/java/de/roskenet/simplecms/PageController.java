@@ -1,10 +1,10 @@
 package de.roskenet.simplecms;
 
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -23,13 +23,14 @@ public class PageController {
 	private String template;
 	
 	@RequestMapping("/")
-	public String root() {
+	public String root(HttpServletRequest req, HttpSession session) {
+		logMeOut(req);
 		return "index";
 	}
 	
 	@RequestMapping("/{content}")
-	public String greeting(@PathVariable("content") String content, Model model, HttpSession session) {
-
+	public String greeting(@PathVariable("content") String content, Model model, HttpServletRequest req, HttpSession session) {
+		logMeOut(req);
 		if(content.equals("index") || content.equals("index.html")) {
 			return "index";
 		}
@@ -40,6 +41,13 @@ public class PageController {
 		hashMap.put("SESSION", session);
 		model.addAllAttributes(hashMap);
 		return template;
+	}
+
+	private void logMeOut(HttpServletRequest req) {
+		System.out.println("REQUEST:");
+		System.out.println(new Date());
+		System.out.println(req.getRequestURL());
+		System.out.println(req.getRemoteAddr());
 	}
 	
 }
