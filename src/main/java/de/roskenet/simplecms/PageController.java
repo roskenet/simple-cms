@@ -16,16 +16,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class PageController {
 	
-	@Value("${spring.thymeleaf.prefix}")
-	private String prefix;
+	@Value("${static.prefix}")
+	private String staticPrefix;
 
+	@Value("${template}")
+	private String template;
+	
 	@RequestMapping("/")
 	public String root() {
 		return "index";
 	}
 	
-	@RequestMapping("/{page}")
-	public String greeting(@PathVariable("page") String content, Model model, HttpSession session) {
+	@RequestMapping("/{content}")
+	public String greeting(@PathVariable("content") String content, Model model, HttpSession session) {
 
 		if(content.equals("index") || content.equals("index.html")) {
 			return "index";
@@ -33,9 +36,10 @@ public class PageController {
 		
 		Map<String, Object> hashMap = new HashMap<String, Object>();
 		hashMap.put("CONTENT", content);
-		hashMap.put("STATIC", "https://s3.eu-central-1.amazonaws.com/felixroskede/");
+		hashMap.put("STATIC", staticPrefix);
+		hashMap.put("SESSION", session);
 		model.addAllAttributes(hashMap);
-		return "page";
+		return template;
 	}
 	
 }
