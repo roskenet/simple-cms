@@ -1,6 +1,5 @@
 package de.roskenet.simplecms;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,35 +18,18 @@ public class PageController {
 	@Value("${static.prefix}")
 	private String staticPrefix;
 
-	@Value("${template}")
-	private String template;
-	
-	@RequestMapping("/")
-	public String root(HttpServletRequest req, HttpSession session) {
-		logMeOut(req);
-		return "index";
+	@RequestMapping({"/", "index"})
+	public String index() {
+		return "redirect:page/index.html";
 	}
 	
-	@RequestMapping("/{content}")
-	public String greeting(@PathVariable("content") String content, Model model, HttpServletRequest req, HttpSession session) {
-		logMeOut(req);
-		if(content.equals("index") || content.equals("index.html")) {
-			return "index";
-		}
-		
+	@RequestMapping("/page/{page}")
+	public String page(@PathVariable("page") String page, Model model, HttpServletRequest req, HttpSession session) {
 		Map<String, Object> hashMap = new HashMap<String, Object>();
-		hashMap.put("CONTENT", content);
 		hashMap.put("STATIC", staticPrefix);
-		hashMap.put("SESSION", session);
 		model.addAllAttributes(hashMap);
-		return template;
-	}
-
-	private void logMeOut(HttpServletRequest req) {
-		System.out.println("REQUEST:");
-		System.out.println(new Date());
-		System.out.println(req.getRequestURL());
-		System.out.println(req.getRemoteAddr());
+		
+		return "pages/" + page;
 	}
 	
 }
