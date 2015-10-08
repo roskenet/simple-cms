@@ -9,8 +9,10 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class PageController {
@@ -32,4 +34,21 @@ public class PageController {
 		return "pages/" + page;
 	}
 	
+    //@ResponseStatus(HttpStatus.NOT_FOUND)  // 404
+    @ExceptionHandler(Exception.class)
+    public String thymeleafeTemplateException(Model model, HttpServletRequest req, HttpSession session) {
+    	
+    	model.addAttribute("errormessage", "Page not Found");
+    	
+    	return "error";
+    }
+    
+    @ExceptionHandler(Exception.class)
+	public ModelAndView handleCustomException(Exception ex) {
+
+		ModelAndView model = new ModelAndView("error");
+		model.addObject("exception", ex);
+		return model;
+
+	}
 }
