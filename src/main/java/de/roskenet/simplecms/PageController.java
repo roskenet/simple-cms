@@ -47,7 +47,7 @@ public class PageController {
 		 */
 		
 		Map<String, Object> hashMap = new HashMap<String, Object>();
-		hashMap.put("STATIC", staticPrefix);
+		hashMap.put("static", staticPrefix);
 		model.addAllAttributes(hashMap);
 		
 		return "pages/" + page;
