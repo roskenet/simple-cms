@@ -25,11 +25,6 @@ public class PageController {
 	@Value("${spring.thymeleaf.prefix}")
 	private String thPrefix;
 	
-	@RequestMapping("/*")
-	public String index() {
-		return "redirect:page/index.html";
-	}
-	
 	@RequestMapping("/page/{page}")
 	public String page(@PathVariable("page") String page, Model model, HttpServletRequest req, HttpSession session) throws FileNotFoundException {
 		
