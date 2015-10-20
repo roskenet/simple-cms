@@ -11,7 +11,16 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
-
+/**
+ * This type of exception handling is only possible with exceptions from inside a controller.
+ * This leads to the effect, that we need to catch Exceptions thrown from the view in a different way.
+ * See: ExceptionFilter
+ * 
+ * How can this be done in a more 'nicer' way???
+ * 
+ * @author felix
+ *
+ */
 @ControllerAdvice
 public class GlobalControllerExceptionHandler {
 
