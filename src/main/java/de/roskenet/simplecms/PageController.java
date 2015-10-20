@@ -4,9 +4,9 @@ import java.io.FileNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -18,12 +18,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class PageController {
-	
-	@Value("${static.prefix}")
-	private String staticPrefix;
 
 	@Value("${spring.thymeleaf.prefix}")
 	private String thPrefix;
+
+	@Resource
+	private Map<String, String> staticValues;
 	
 	@RequestMapping("/page/{page}")
 	public String page(@PathVariable("page") String page, Model model, HttpServletRequest req, HttpSession session) throws FileNotFoundException {
@@ -40,10 +40,8 @@ public class PageController {
 		/*
 		 * End of ugly hack.
 		 */
-		
-		Map<String, Object> hashMap = new HashMap<String, Object>();
-		hashMap.put("static", staticPrefix);
-		model.addAllAttributes(hashMap);
+
+		model.addAllAttributes(staticValues);
 		
 		return "pages/" + page;
 	}
