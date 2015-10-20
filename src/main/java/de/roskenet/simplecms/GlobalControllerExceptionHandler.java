@@ -1,5 +1,6 @@
 package de.roskenet.simplecms;
 
+import java.io.FileNotFoundException;
 import java.util.Date;
 import java.util.Map;
 
@@ -19,7 +20,7 @@ public class GlobalControllerExceptionHandler {
 	@Resource
 	private Map<String, String> staticValues;
     
-    @ExceptionHandler(value = {Exception.class, RuntimeException.class})
+    @ExceptionHandler(FileNotFoundException.class)
     public ModelAndView defaultErrorHandler(HttpServletRequest request, HttpServletResponse response, Exception e) {
             ModelAndView mav = new ModelAndView(DEFAULT_ERROR_VIEW);
             response.setStatus(404);
