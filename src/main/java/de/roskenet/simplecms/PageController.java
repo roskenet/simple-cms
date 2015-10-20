@@ -33,10 +33,10 @@ public class PageController {
 		 * Thymeleaf throws 500 - which is in my eyes wrong but I did not find a solution to catch this
 		 * Exception.
 		 */
-		Path path = Paths.get(thPrefix.substring(5) + "/pages/" + page + ".html");
-		if (Files.notExists(path)) {
-		  throw new FileNotFoundException();
-		}
+//		Path path = Paths.get(thPrefix.substring(5) + "/pages/" + page + ".html");
+//		if (Files.notExists(path)) {
+//		  throw new FileNotFoundException();
+//		}
 		/*
 		 * End of ugly hack.
 		 */
