@@ -1,10 +1,10 @@
 package de.roskenet.simplecms;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.IntegrationTest;
@@ -20,18 +20,16 @@ public class RootTest {
     @Value("${local.server.port}")
     private int serverPort;
     
+    /**
+     * Checks for redirection to the landing page.
+     */
     @Test
-	public void testRootPage() throws Exception {
+	public void testLandingPage() throws Exception {
         WebDriver driver = new HtmlUnitDriver();
 
-        // And now use this to visit Google
         driver.get("http://localhost:" + serverPort);
-//        Assert.assertEquals("TestPage", driver.getTitle());
-String currentUrl = driver.getCurrentUrl();
-System.out.println(currentUrl);
-WebElement resultsDiv = driver.findElement(By.className("test"));
-
-	String text = resultsDiv.getText();
-	System.out.println(text);
+        
+        assertEquals("TestPage", driver.getTitle());
+        
 	}
 }

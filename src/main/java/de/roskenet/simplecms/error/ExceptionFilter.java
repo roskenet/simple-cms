@@ -1,4 +1,4 @@
-package de.roskenet.simplecms;
+package de.roskenet.simplecms.error;
 
 import java.io.IOException;
 
@@ -30,7 +30,7 @@ public class ExceptionFilter implements Filter{
 		try {
 	        filterChain.doFilter(request, response);
 	    } catch (NestedServletException ex) {
-	    	// Do a fine grained exception handling here!
+	    	// How do we get a fine grained exception handling here?
 	    	//	    	if(ex.getCause())
 	        RequestDispatcher error = request.getRequestDispatcher("/err");
 	        error.forward(request,response);
