@@ -25,6 +25,12 @@ public class PageController {
 	@Resource
 	private Map<String, String> staticValues;
 	
+	@RequestMapping("/err")
+	public String page(Model model, HttpServletRequest req, HttpSession session){
+		model.addAllAttributes(staticValues);
+		return "error";
+	}
+	
 	@RequestMapping("/page/{page}")
 	public String page(@PathVariable("page") String page, Model model, HttpServletRequest req, HttpSession session) throws FileNotFoundException {
 		
