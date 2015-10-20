@@ -1,9 +1,6 @@
 package de.roskenet.simplecms;
 
 import java.io.FileNotFoundException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -38,6 +35,10 @@ public class PageController {
 		 * This is an ugly hack to throw a 404 when the template file is not found.
 		 * Thymeleaf throws 500 - which is in my eyes wrong but I did not find a solution to catch this
 		 * Exception.
+		 * 
+		 * UPDATE and WORK IN PROGRESS:
+		 * See: ExceptionFilter and GlobalControllerExceptionHandler.java
+		 * 
 		 */
 //		Path path = Paths.get(thPrefix.substring(5) + "/pages/" + page + ".html");
 //		if (Files.notExists(path)) {
