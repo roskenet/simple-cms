@@ -8,7 +8,9 @@ Put your templates in a directory <TemplateDir>/pages/ where the user running si
 Everything in /pages/ will be accessible from the web. So you can put fragments etc. directly in <TemplateDir> (or any subdirectory).
 Create <TemplateDir>/pages/index.html.
 
-You can provide static key/value pairs in a property file (key=value) and inject them with --static=<FullPathToStaticValueFile> into your thymeleaf templates.
+Provide static key/value pairs in a property file (key=value) and inject them with --static=<FullPathToStaticValueFile> into your thymeleaf templates.
+
+Supports Springs CRaSH.
 
 Start up your cms with
 java -jar simple-cms-<VERSION>.jar 
@@ -30,4 +32,10 @@ Enable/disable thymeleaf caching. Will reread templates every time. (Useful when
 --compression=on
 Enables tomcats compression.
 
-
+--shell=true
+Enable remote shell on
+--shellport=8081
+with user
+--shelluser=scms
+and password
+--shellpassword=scms
