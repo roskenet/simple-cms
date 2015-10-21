@@ -1,3 +1,4 @@
+[![BuildStatus](https://travis-ci.org/roskenet/simple-cms.svg?branch=master)](https://travis-ci.org/roskenet/simple-cms)
 # simple-cms
 The most simple thymeleaf based CMS possible.
 
