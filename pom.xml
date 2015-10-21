@@ -9,7 +9,21 @@
 	<packaging>jar</packaging>
 
 	<name>simple-cms</name>
-	<description>Demo project for Spring Boot</description>
+	<description>The most limited ContentManagementSystem ever!</description>
+	<url>https://github.com/roskenet/simple-cms</url>
+	<inceptionYear>2015</inceptionYear>
+	<licenses>
+		<license>
+			<name>GNU General Public License (GPL)</name>
+			<url>http://www.gnu.org/licenses/gpl.txt</url>
+		</license>
+	</licenses>
+	<developers>
+		<developer>
+			<name>Felix Roske</name>
+			<email>f.roske@roskenet.de</email>
+		</developer>
+	</developers>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
