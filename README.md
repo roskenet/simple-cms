@@ -32,10 +32,10 @@ Enable/disable thymeleaf caching. Will reread templates every time. (Useful when
 --compression=on
 Enables tomcats compression.
 
---shell=true
+--rshell=true
 Enable remote shell on
---shellport=8081
+--rshellport=8081
 with user
---shelluser=scms
+--rshelluser=scms
 and password
---shellpassword=scms
+--rshellpassword=scms
