@@ -1,6 +1,6 @@
 [![BuildStatus](https://travis-ci.org/roskenet/simple-cms.svg?branch=master)](https://travis-ci.org/roskenet/simple-cms)
 # simple-cms
-The most simple thymeleaf based CMS possible.
+The most simple thymeleaf based Content Management System possible.
 
 Put your templates in a directory <TemplateDir>/pages/ where the user running simple-cms can read them and set
 --prefix=<TemplateDir> (defaults to /var/www)
