@@ -1,5 +1,7 @@
 [![BuildStatus](https://travis-ci.org/roskenet/simple-cms.svg?branch=master)](https://travis-ci.org/roskenet/simple-cms)
+[![Coverage Status](https://coveralls.io/repos/roskenet/simple-cms/badge.svg?branch=master&service=github)](https://coveralls.io/github/roskenet/simple-cms?branch=master)
 # simple-cms
+
 The most simple thymeleaf based Content Management System possible.
 
 Put your templates in a directory <TemplateDir>/pages/ where the user running simple-cms can read them and set
