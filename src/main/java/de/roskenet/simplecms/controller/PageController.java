@@ -19,6 +19,11 @@ public class PageController extends AbstractSCMSController{
 	public String page(@PathVariable("page") String page, Model model, HttpServletRequest req, HttpSession session) throws FileNotFoundException {
 
 		model.addAllAttributes(getStaticValues());
+		model.addAttribute("request", req);
+		
+		if(!session.isNew()) {
+			model.addAttribute("session", session);
+		}
 		
 		return "pages/" + page;
 	}
