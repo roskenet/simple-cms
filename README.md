@@ -8,7 +8,7 @@ Put your templates in a directory <TemplateDir>/pages/ where the user running si
 --prefix=<TemplateDir> (defaults to /var/www)
 
 Everything in /pages/ will be accessible from the web. So you can put fragments etc. directly in <TemplateDir> (or any subdirectory).
-Create <TemplateDir>/pages/index.html.
+Create <TemplateDir>/page/index.html.
 
 Provide static key/value pairs in a property file (key=value) and inject them with --static=<FullPathToStaticValueFile> into your thymeleaf templates.
 
@@ -23,7 +23,7 @@ Options (with their defaults):
 Port where simple-cms will listen.
 
 --prefix=/var/www
-Thymeleaf root directory. Store pages in subdir pages/.
+Thymeleaf root directory. Store pages in subdir page/.
 
 --static=
 Set static property file, where you store key/value pairs.
