@@ -9,7 +9,7 @@ import org.springframework.core.io.FileSystemResource;
 @Configuration
 public class StaticConfig {
 
-	@Value("${static:}")
+	@Value("${scms.static:}")
 	private String staticValues;
 
 	@Bean
