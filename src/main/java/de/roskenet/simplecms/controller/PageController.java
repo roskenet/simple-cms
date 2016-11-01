@@ -20,8 +20,8 @@ public class PageController extends AbstractSCMSController {
 	private PageRepository pageRepository;
 
 	@RequestMapping("/page/**")
-	public String page(Model model, HttpServletRequest req, HttpSession session) {
-		String fullPath = (String) req.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
+	public String page(final Model model, final HttpServletRequest req, final HttpSession session) {
+		final String fullPath = (String) req.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
 
 		Page page = pageRepository.findOne(filterSuffix(fullPath));
 		if (page != null) {
@@ -31,14 +31,14 @@ public class PageController extends AbstractSCMSController {
 		model.addAllAttributes(getStaticValues());
 		model.addAttribute("request", req);
 
-		// if(!session.isNew()) {
-		// model.addAttribute("session", session);
-		// }
+//		if (!session.isNew()) {
+//			model.addAttribute("session", session);
+//		}
 
 		return filterSuffix(fullPath);
 	}
 
-	private String filterSuffix(String fullPath) {
+	private String filterSuffix(final String fullPath) {
 		return fullPath.substring(0, fullPath.lastIndexOf('.'));
 	}
 
