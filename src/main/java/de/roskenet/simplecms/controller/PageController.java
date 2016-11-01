@@ -14,33 +14,32 @@ import de.roskenet.simplecms.entity.Page;
 import de.roskenet.simplecms.repository.PageRepository;
 
 @Controller
-public class PageController extends AbstractSCMSController{
+public class PageController extends AbstractSCMSController {
 
 	@Autowired
 	private PageRepository pageRepository;
-	
+
 	@RequestMapping("/page/**")
 	public String page(Model model, HttpServletRequest req, HttpSession session) {
-	    String fullPath = (String) req.getAttribute(
-	            HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
-	    
+		String fullPath = (String) req.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
+
+		Page page = pageRepository.findOne(filterSuffix(fullPath));
+		if (page != null) {
+			model.addAttribute("page", page);
+		}
+
 		model.addAllAttributes(getStaticValues());
 		model.addAttribute("request", req);
-		
-//		if(!session.isNew()) {
-//			model.addAttribute("session", session);
-//		}
-		
-		Page page = pageRepository.findOne(filterSuffix(fullPath));
-//		page.getTags().forEach(System.out::println);
 
-		model.addAttribute("page", page);
-		
+		// if(!session.isNew()) {
+		// model.addAttribute("session", session);
+		// }
+
 		return filterSuffix(fullPath);
 	}
 
 	private String filterSuffix(String fullPath) {
 		return fullPath.substring(0, fullPath.lastIndexOf('.'));
 	}
-	
+
 }

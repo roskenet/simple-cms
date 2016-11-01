@@ -1,6 +1,7 @@
 package de.roskenet.simplecms.entity;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -10,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -35,6 +37,10 @@ public class Page {
 	private String tldr;
 	private String avatar;
 	private String path;
+	
+	@OneToMany
+    @JoinColumn(name = "page_id", referencedColumnName = "id")
+	private List<AttributeView> attributes;
 	
 	public String getId() {
 		return id;
