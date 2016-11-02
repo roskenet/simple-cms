@@ -76,6 +76,12 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
+			<groupId>com.opentable.components</groupId>
+			<artifactId>otj-pg-embedded</artifactId>
+			<version>0.7.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
 			<scope>test</scope>
