@@ -4,6 +4,8 @@
 
 The most simple thymeleaf based Content Management System possible.
 
+V2.0 needs a PostgreSQL database for meta data storage - not necessarily needed. (TODO: Support different types)
+
 Put your templates in a directory <TemplateDir>/pages/ where the user running simple-cms can read them and set
 --prefix=<TemplateDir> (defaults to /var/www)
 
