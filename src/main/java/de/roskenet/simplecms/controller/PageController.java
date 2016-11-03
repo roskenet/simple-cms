@@ -31,10 +31,10 @@ public class PageController extends AbstractSCMSController {
 		model.addAllAttributes(getStaticValues());
 		model.addAttribute("request", req);
 
-		if (!session.isNew()) {
-		    HttpSession theSession = session;
-			model.addAttribute("session", theSession);
-		}
+//		if (!session.isNew()) {
+//		    HttpSession theSession = session;
+//			model.addAttribute("session", theSession);
+//		}
 
 		return filterSuffix(fullPath);
 	}

@@ -8,7 +8,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = SimpleCmsApplication.class)
-@WebAppConfiguration
 public class SimpleCmsApplicationTests {
 
 	@Test
