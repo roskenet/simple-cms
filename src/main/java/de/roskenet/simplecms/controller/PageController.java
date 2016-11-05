@@ -36,7 +36,8 @@ public class PageController extends AbstractSCMSController {
 //			model.addAttribute("session", theSession);
 //		}
 
-		return filterSuffix(fullPath);
+//		return filterSuffix(fullPath);
+		return page.getPath(); 
 	}
 
 	private String filterSuffix(final String fullPath) {
