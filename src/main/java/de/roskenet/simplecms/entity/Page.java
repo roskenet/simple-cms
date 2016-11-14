@@ -40,17 +40,23 @@ public class Page {
 	private String tldr;
 	private String avatar;
 	private String path;
+
+	@Column(name="category_id")
+	private String categoryId;
 	
-//	@OneToMany
-//    @JoinColumn(name = "page_id", referencedColumnName = "id")
-//	private List<AttributeView> attributes;
+//	@ElementCollection
+//	@JoinTable(name = "category_view", 
+//             joinColumns = @JoinColumn(name = "main", referencedColumnName = "category_id"))
+//	@MapKeyColumn (name="id")
+//	@Column(name="page_id", nullable=true)
+//	private Map<String, String> breadcrumbs = new HashMap<>();
 
 	@ElementCollection
 	@JoinTable(name="attribute_view", joinColumns=@JoinColumn(name="page_id", referencedColumnName="id"))
 	@MapKeyColumn (name="name")
 	@Column(name="value")
 	private Map<String, String> attributes = new HashMap<String, String>();
-	
+
 	public String getId() {
 		return id;
 	}
@@ -122,4 +128,24 @@ public class Page {
 	public void setAttributes(Map<String, String> attributes) {
 		this.attributes = attributes;
 	}
+
+	public String getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(String categoryId) {
+		this.categoryId = categoryId;
+	}
+
+//	public Map<String, String> getBreadcrumbs() {
+//		return breadcrumbs;
+//	}
+//
+//	public void setBreadcrumbs(Map<String, String> breadcrumbs) {
+//		this.breadcrumbs = breadcrumbs;
+//	}
+
+
+	
+	
 }
