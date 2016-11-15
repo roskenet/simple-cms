@@ -36,10 +36,10 @@ public class PageController extends AbstractSCMSController {
 		if (page != null) {
 			model.addAttribute("page", page);
 			
-			List<CategoryView> tempCategories = categoryViewRepository.findByMain(page.getCategoryId()).collect(Collectors.toList());
+			List<CategoryView> categories = categoryViewRepository.findByMainOrderByLevelDesc(page.getCategoryId()).collect(Collectors.toList());
 			
-			List<CategoryView> categories = new LinkedList<>();
-			tempCategories.forEach(e -> categories.add(0, e));
+//			List<CategoryView> categories = new LinkedList<>();
+//			tempCategories.forEach(e -> categories.add(0, e));
 			
 			model.addAttribute("categories", categories);
 			

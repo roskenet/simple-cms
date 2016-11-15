@@ -8,5 +8,5 @@ import de.roskenet.simplecms.entity.CategoryView;
 
 public interface CategoryViewRepository extends CrudRepository<CategoryView, String> {
 
-	Stream<CategoryView> findByMain(String main);
+	Stream<CategoryView> findByMainOrderByLevelDesc(String main);
 }

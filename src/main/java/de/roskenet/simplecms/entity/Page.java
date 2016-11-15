@@ -1,7 +1,6 @@
 package de.roskenet.simplecms.entity;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -40,6 +39,7 @@ public class Page {
 	private String tldr;
 	private String avatar;
 	private String path;
+	private String template;
 
 	@Column(name="category_id")
 	private String categoryId;
@@ -55,7 +55,7 @@ public class Page {
 	@JoinTable(name="attribute_view", joinColumns=@JoinColumn(name="page_id", referencedColumnName="id"))
 	@MapKeyColumn (name="name")
 	@Column(name="value")
-	private Map<String, String> attributes = new HashMap<String, String>();
+	private Map<String, String> attributes;
 
 	public String getId() {
 		return id;
@@ -135,6 +135,14 @@ public class Page {
 
 	public void setCategoryId(String categoryId) {
 		this.categoryId = categoryId;
+	}
+
+	public String getTemplate() {
+		return template;
+	}
+
+	public void setTemplate(String template) {
+		this.template = template;
 	}
 
 //	public Map<String, String> getBreadcrumbs() {

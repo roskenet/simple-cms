@@ -13,6 +13,8 @@ public class CategoryView {
 
 	private String pageId;
 	
+	private int level;
+	
 	public String getId() {
 		return id;
 	}
@@ -35,6 +37,14 @@ public class CategoryView {
 
 	public void setPageId(String pageId) {
 		this.pageId = pageId;
+	}
+
+	public int getLevel() {
+		return level;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
 	}
 	
 	
