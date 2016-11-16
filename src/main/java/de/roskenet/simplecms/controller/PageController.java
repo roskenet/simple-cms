@@ -1,6 +1,5 @@
 package de.roskenet.simplecms.controller;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,6 +22,9 @@ import de.roskenet.simplecms.repository.PageRepository;
 public class PageController extends AbstractSCMSController {
 
 	@Autowired
+	private RequestLogger requestLogger;
+	
+	@Autowired
 	private PageRepository pageRepository;
 
 	@Autowired
@@ -31,7 +33,7 @@ public class PageController extends AbstractSCMSController {
 	@RequestMapping("/page/**")
 	public String page(final Model model, final HttpServletRequest req, final HttpSession session) {
 		final String fullPath = (String) req.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
-
+		
 		final Page page = pageRepository.findOne(filterSuffix(fullPath));
 		if (page != null) {
 			model.addAttribute("page", page);
@@ -42,11 +44,7 @@ public class PageController extends AbstractSCMSController {
 //			tempCategories.forEach(e -> categories.add(0, e));
 			
 			model.addAttribute("categories", categories);
-			
-			
 		}
-		
-		
 
 		model.addAllAttributes(getStaticValues());
 		model.addAttribute("request", req);
@@ -57,6 +55,7 @@ public class PageController extends AbstractSCMSController {
 //		}
 
 //		return filterSuffix(fullPath);
+		requestLogger.writeLog(req);
 		return page.getPath(); 
 	}
 
