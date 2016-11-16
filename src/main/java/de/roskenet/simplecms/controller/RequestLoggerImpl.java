@@ -29,7 +29,13 @@ public class RequestLoggerImpl implements RequestLogger {
 		logging.setMethod(request.getMethod());
 		logging.setUrl((String) request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE));
 		logging.setAgent((String) request.getHeader("User-Agent"));
-		logging.setIp(request.getRemoteAddr());
+		
+		String ipAddress = request.getHeader("X-FORWARDED-FOR");
+		if (ipAddress == null) {
+		    ipAddress = request.getRemoteAddr();
+		}
+		
+		logging.setIp(ipAddress);
 		return logging;
 	}
 }
