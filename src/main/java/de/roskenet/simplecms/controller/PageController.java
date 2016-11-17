@@ -39,10 +39,6 @@ public class PageController extends AbstractSCMSController {
 			model.addAttribute("page", page);
 			
 			List<CategoryView> categories = categoryViewRepository.findByMainOrderByLevelDesc(page.getCategoryId()).collect(Collectors.toList());
-			
-//			List<CategoryView> categories = new LinkedList<>();
-//			tempCategories.forEach(e -> categories.add(0, e));
-			
 			model.addAttribute("categories", categories);
 		}
 
@@ -54,7 +50,6 @@ public class PageController extends AbstractSCMSController {
 //			model.addAttribute("session", theSession);
 //		}
 
-//		return filterSuffix(fullPath);
 		requestLogger.writeLog(req);
 		return page.getPath(); 
 	}
