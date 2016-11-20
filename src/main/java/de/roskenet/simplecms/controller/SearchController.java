@@ -2,6 +2,7 @@ package de.roskenet.simplecms.controller;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -27,7 +28,7 @@ public class SearchController extends AbstractSCMSController {
 		Map<String, String[]> parameterMap = req.getParameterMap();
 		if(parameterMap.containsKey("tag")) {
 			String searchTag = parameterMap.get("tag")[0];
-			List<Page> pageByTags = pageRepository.getPageByTagsIdContains(searchTag);
+			List<Page> pageByTags = pageRepository.getPageByTagsIdContains(searchTag).collect(Collectors.toList());
 			model.addAttribute("result", pageByTags);
 		}
 		
