@@ -14,7 +14,6 @@ public class TestPostgreSQLConfig {
 
 	@Bean
 	public DataSource dataSource() throws IOException {
-//		EmbeddedPostgreSQL postgreSQL = EmbeddedPostgreSQL.start();
 		EmbeddedPostgres postgreSQL = EmbeddedPostgres.start();
 		return postgreSQL.getPostgresDatabase();
 	}
