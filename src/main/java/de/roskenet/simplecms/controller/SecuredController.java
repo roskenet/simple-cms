@@ -4,25 +4,29 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.HandlerMapping;
 
 import de.roskenet.simplecms.AbstractSCMSController;
 import de.roskenet.simplecms.repository.PageRepository;
 
-@Controller
+@RestController
 public class SecuredController extends AbstractSCMSController {
 
 	@Autowired
 	private PageRepository pageRepository;
 
-	@RequestMapping("/secured/{path}")
-	@PreAuthorize("isAuthenticated() and hasPermission(#path, 'path.to.Thing', 'read')")
-	public String page(final Model model, final HttpServletRequest req, final HttpSession session) {
-
-		return "/secured/hello";
+	@RequestMapping(value="/api/**", method=RequestMethod.GET)
+	public String page(final HttpServletRequest req, final HttpSession session) {
+		final String fullPath = (String) req.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
+		
+		// PathVariables can not handle slashes so we need to extract all relevant information
+		// from the request by hand.
+		
+		return fullPath;
 	}
 
 }
