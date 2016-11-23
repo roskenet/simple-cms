@@ -9,6 +9,14 @@ public class Tag {
 	@Id
 	private String id;
 
+	public Tag() {
+		
+	}
+	
+	public Tag(final String id) {
+		this.id=id;
+	}
+	
 	public String getId() {
 		return id;
 	}

@@ -1,6 +1,8 @@
 package de.roskenet.simplecms.controller;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
@@ -55,7 +57,15 @@ public class PageController extends AbstractSCMSController {
 	}
 
 	private String filterSuffix(final String fullPath) {
-		return fullPath.substring(0, fullPath.lastIndexOf('.'));
+//		return fullPath.substring(0, fullPath.lastIndexOf('.'));
+		Pattern pattern = Pattern.compile("/page/(.*?)\\.html");
+		Matcher matcher = pattern.matcher(fullPath);
+		
+		if(matcher.find()) {
+			String pageId = matcher.group(1);
+			return pageId;
+		}
+		return "";
 	}
 
 }
