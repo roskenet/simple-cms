@@ -20,8 +20,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.HandlerMapping;
 
-import com.google.common.collect.Lists;
-
 import de.roskenet.simplecms.AbstractSCMSController;
 import de.roskenet.simplecms.entity.Page;
 import de.roskenet.simplecms.entity.PageTag;
@@ -40,8 +38,7 @@ public class ApiTagController extends AbstractSCMSController {
 	@RequestMapping(value="/api/pages")
 	public List<Page> getPages(final HttpServletRequest req) {
 		final String fullPath = (String) req.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
-		Iterable<Page> findAll = pageRepository.findAll();
-		return Lists.newArrayList(findAll);
+		return pageRepository.findAll();
 	}
 	
 	@RequestMapping(value="/api/pages/**/tags", method=RequestMethod.GET)
