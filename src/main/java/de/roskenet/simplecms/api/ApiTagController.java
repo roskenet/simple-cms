@@ -21,74 +21,76 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.HandlerMapping;
 
 import de.roskenet.simplecms.AbstractSCMSController;
-import de.roskenet.simplecms.entity.Page;
 import de.roskenet.simplecms.entity.PageTag;
 import de.roskenet.simplecms.entity.Tag;
 import de.roskenet.simplecms.repository.PageRepository;
 
+/*
+ * Naive quick'n'dirty implementation.
+ * TODO use Spring's RepositoryRestResource Features.
+ */
 @RestController
 public class ApiTagController extends AbstractSCMSController {
 
 	@Autowired
 	private PageRepository pageRepository;
-	
+
 	@Autowired
 	private EntityManager entityManager;
 
-	@RequestMapping(value="/api/pages", method=RequestMethod.GET)
-	public List<Page> getPages(final HttpServletRequest req) {
-		return pageRepository.findAll();
-	}
-	
-	@RequestMapping(value="/api/pages/**/tags", method=RequestMethod.GET)
+	@RequestMapping(value = "/api/pages/**/tags", method = RequestMethod.GET)
 	public List<String> getTags(final HttpServletRequest req, final HttpSession session) {
 		final String fullPath = (String) req.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
-		
-		// PathVariables can not handle slashes so we need to extract all relevant information
+
+		// PathVariables can not handle slashes so we need to extract all
+		// relevant information
 		// from the request by hand.
 		Pattern pattern = Pattern.compile("/api/pages/(.*?)/tags");
 		Matcher matcher = pattern.matcher(fullPath);
-		
-		if(matcher.find()) {
+
+		if (matcher.find()) {
 			String pageId = matcher.group(1);
 			List<String> tagList = new ArrayList<>();
-			
+
 			pageRepository.findOne(pageId).getTags().forEach(s -> tagList.add(s.getId()));
 			return tagList;
 		}
-		
+
 		return Arrays.asList("");
 	}
-	
-	@RequestMapping(value="/api/pages/**/tags", method=RequestMethod.POST)
+
+	@RequestMapping(value = "/api/pages/**/tags", method = RequestMethod.POST)
 	@Transactional
-	public void postTags(final HttpServletRequest req, final HttpSession session, @RequestBody final List<String> tags) {
-    final String fullPath = (String) req.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
-		
-		// PathVariables can not handle slashes so we need to extract all relevant information
+	public void postTags(final HttpServletRequest req, final HttpSession session,
+			@RequestBody final List<String> tags) {
+		final String fullPath = (String) req.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
+
+		// PathVariables can not handle slashes so we need to extract all
+		// relevant information
 		// from the request by hand.
 		Pattern pattern = Pattern.compile("/api/pages/(.*?)/tags");
 		Matcher matcher = pattern.matcher(fullPath);
-		
-		if(matcher.find()) {
+
+		if (matcher.find()) {
 			String pageId = matcher.group(1);
 			entityManager.createNativeQuery("DELETE FROM page_tag WHERE page_id='" + pageId + "'").executeUpdate();
 			tags.forEach(tag -> insertTag(pageId, tag));
 		}
 	}
-	
+
 	private void insertTag(final String page, final String tag) {
-		Query query = entityManager.createNativeQuery("SELECT id from tag where id='" + tag +"'", Tag.class);
+		Query query = entityManager.createNativeQuery("SELECT id from tag where id='" + tag + "'", Tag.class);
 		try {
 			query.getSingleResult();
 		} catch (NoResultException nre) {
-//			System.out.println(nre);
-//			Query insertQuery = entityManager.createNativeQuery("INSERT INTO tag (id) VALUES ('" + tag + "'");
-//			insertQuery.executeUpdate();
+			// System.out.println(nre);
+			// Query insertQuery = entityManager.createNativeQuery("INSERT INTO
+			// tag (id) VALUES ('" + tag + "'");
+			// insertQuery.executeUpdate();
 			Tag newTag = new Tag(tag);
 			entityManager.persist(newTag);
 		}
-		
+
 		PageTag pageTag = new PageTag();
 		pageTag.setPageId(page);
 		pageTag.setTagId(tag);
