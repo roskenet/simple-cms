@@ -1,4 +1,4 @@
-package de.roskenet.simplecms.controller;
+package de.roskenet.simplecms.api;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,9 +35,8 @@ public class ApiTagController extends AbstractSCMSController {
 	@Autowired
 	private EntityManager entityManager;
 
-	@RequestMapping(value="/api/pages")
+	@RequestMapping(value="/api/pages", method=RequestMethod.GET)
 	public List<Page> getPages(final HttpServletRequest req) {
-		final String fullPath = (String) req.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
 		return pageRepository.findAll();
 	}
 	

@@ -1,0 +1,1 @@
+ALTER TABLE logging ALTER COLUMN reqtime DROP NOT NULL;
