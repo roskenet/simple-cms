@@ -32,6 +32,9 @@ public class Page {
 	@ManyToOne
 	private Suser suser;
 	
+	@ManyToOne
+	private Sgroup sgroup;
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date created;
 	
@@ -57,6 +60,12 @@ public class Page {
 	@Column(name="value")
 	private Map<String, String> attributes;
 
+	public Page() {}
+	
+	public Page(String id) {
+		this.id = id;
+	}
+	
 	public String getId() {
 		return id;
 	}
@@ -79,6 +88,14 @@ public class Page {
 
 	public void setSuser(Suser suser) {
 		this.suser = suser;
+	}
+
+	public Sgroup getSgroup() {
+		return sgroup;
+	}
+
+	public void setSgroup(Sgroup sgroup) {
+		this.sgroup = sgroup;
 	}
 
 	public Date getCreated() {

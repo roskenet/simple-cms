@@ -11,6 +11,12 @@ public class Suser {
 	private String name;
 	private String avatar;
 
+	public Suser() {}
+	
+	public Suser(final String id) {
+		this.id=id;
+	}
+	
 	public String getId() {
 		return id;
 	}

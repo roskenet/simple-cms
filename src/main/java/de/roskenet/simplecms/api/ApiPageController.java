@@ -1,21 +1,25 @@
 package de.roskenet.simplecms.api;
 
-import java.util.HashSet;
+import java.util.Date;
 import java.util.List;
-import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.web.servlet.HandlerMapping;
 
 import de.roskenet.simplecms.entity.Page;
+import de.roskenet.simplecms.entity.Sgroup;
+import de.roskenet.simplecms.entity.Suser;
 import de.roskenet.simplecms.repository.PageRepository;
 
 
@@ -29,18 +33,10 @@ public class ApiPageController {
 	@Autowired
 	private PageRepository pageRepository;
 	
-	class ApiPage {
-		@JsonProperty("id")
-		String id;
-		@JsonProperty("path")
-		String path;
-		@JsonProperty("tags")
-		Set<String> tags = new HashSet<>();
-		@JsonProperty("author")
-		String owner;
-		@JsonProperty("category")
-		String category;
-	}
+	@Autowired
+	private EntityManager em;
+	
+
 	
 	private ApiPage mapDBPageToApiPage(Page page) {
 		final ApiPage apiPage = new ApiPage();
@@ -51,7 +47,21 @@ public class ApiPageController {
 		}
 		apiPage.category = page.getCategoryId();
 		apiPage.owner = page.getSuser().getId();
-		return apiPage;
+		return apiPage;	
+	}
+	private Page mapApiPageToDBPage(final ApiPage apiPage) {
+		Page page = new Page(apiPage.id);
+		Suser suser = new Suser(apiPage.owner);
+		Sgroup sgroup = new Sgroup("ANONYMOUS_USERS");
+		page.setSuser(suser);
+		page.setSgroup(sgroup);
+		page.setCreated(new Date());
+		
+		page.setId(apiPage.id);
+		page.setPath(apiPage.path);
+		page.setCategoryId(apiPage.category);
+		
+		return page;
 	}
 	
 	@RequestMapping(value = "/api/pages", method = RequestMethod.GET)
@@ -63,7 +73,22 @@ public class ApiPageController {
 	}
 	
 	@RequestMapping(value = "/api/pages", method = RequestMethod.POST)
-	public void postPage(@RequestBody ApiPage page) {
-		
+	@Transactional
+	public void postPage(@RequestBody final ApiPage page) {
+		Page dbPage = mapApiPageToDBPage(page);
+		em.persist(dbPage);
+	}
+	
+	@RequestMapping(value = "/api/pages/**", method = RequestMethod.DELETE)
+	@Transactional
+	public void deletePage(final HttpServletRequest req) {
+		final String fullPath = (String) req.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
+		Pattern pattern = Pattern.compile("/api/pages/(.*?)$");
+		Matcher matcher = pattern.matcher(fullPath);
+
+		if (matcher.find()) {
+			String pageId = matcher.group(1);
+			em.createNativeQuery("DELETE FROM page WHERE id='" + pageId + "'").executeUpdate();
+		}
 	}
 }
