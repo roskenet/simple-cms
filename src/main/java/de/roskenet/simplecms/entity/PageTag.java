@@ -25,13 +25,12 @@ public class PageTag {
 	public void setTagId(String tagId) {
 		pageTagId.tagId = tagId;
 	}
-	
-	
-
 }
 
 @Embeddable
 class PageTagId implements Serializable {
+	private static final long serialVersionUID = 7183770182713277784L;
+
 	@Column(name="page_id")
     public String pageId;
 
