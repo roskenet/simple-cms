@@ -53,7 +53,12 @@ public class PageController extends AbstractSCMSController {
 //		}
 
 		requestLogger.writeLog(req);
-		return page.getPath(); 
+		if(page != null) {
+			return page.getPath(); 			
+		}
+		else {
+			return "/page/" + filterSuffix(fullPath);
+		}
 	}
 
 	private String filterSuffix(final String fullPath) {

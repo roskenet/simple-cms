@@ -4,15 +4,16 @@
 
 The most simple thymeleaf based Content Management System possible.
 
-V2.0 needs a PostgreSQL database for meta data storage - not necessarily needed. (TODO: Support different types)
+Needs a PostgreSQL database for meta data storage. (TODO: Support different db implementations).
 
-Put your templates in a directory <TemplateDir>/pages/ where the user running simple-cms can read them and set
---prefix=<TemplateDir> (defaults to /var/www)
+Put your templates in a directory <TemplateDir>/page/ where the user running simple-cms can read them and set
+--prefix=<TemplateDir> (defaults to /var/www/)
+NEEDS A TRAILING SLASH!
 
-Everything in /pages/ will be accessible from the web. So you can put fragments etc. directly in <TemplateDir> (or any subdirectory).
+Everything in /page/ will be accessible from the web. So you can put fragments etc. directly in <TemplateDir> (or any subdirectory).
 Create <TemplateDir>/page/index.html.
 
-Provide static key/value pairs in a property file (key=value) and inject them with --static=<FullPathToStaticValueFile> into your thymeleaf templates.
+Provide general key/value pairs in a property file (key=value) and inject them with --static=<FullPathToStaticValueFile> into your thymeleaf templates.
 
 Supports Springs CRaSH.
 
