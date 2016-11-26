@@ -13,6 +13,7 @@ public class Suser {
 	private String id;
 	private String name;
 	private String avatar;
+	private String passwd;
 
 	public Suser() {}
 	
@@ -42,6 +43,14 @@ public class Suser {
 
 	public void setAvatar(String avatar) {
 		this.avatar = avatar;
+	}
+
+	public String getPasswd() {
+		return passwd;
+	}
+
+	public void setPasswd(String passwd) {
+		this.passwd = passwd;
 	}
 
 }
