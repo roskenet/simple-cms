@@ -9,7 +9,7 @@ import javax.persistence.Id;
 public class Suser {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String id;
 	private String name;
 	private String avatar;
