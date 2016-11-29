@@ -10,7 +10,7 @@ public class Attribute {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String id;
+	private Integer id;
 
 	private String level;
 	private String categorySelector;
@@ -18,11 +18,11 @@ public class Attribute {
 	private String name;
 	private String value;
 
-	public String getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
