@@ -10,6 +10,7 @@ public class Category {
 	private String id;
 	private String supercat = "Home";
 	private String pageId;
+	private Integer sortKey;
 	
 	public String getId() {
 		return id;
@@ -29,4 +30,11 @@ public class Category {
 	public void setPageId(String pageId) {
 		this.pageId = pageId;
 	}
+    public Integer getSortKey() {
+        return sortKey;
+    }
+    public void setSortKey(Integer sortKey) {
+        this.sortKey = sortKey;
+    }
+	
 }
