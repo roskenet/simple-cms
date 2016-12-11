@@ -47,11 +47,6 @@ public class PageController extends AbstractSCMSController {
 		model.addAllAttributes(getStaticValues());
 		model.addAttribute("request", req);
 
-//		if (!session.isNew()) {
-//		    HttpSession theSession = session;
-//			model.addAttribute("session", theSession);
-//		}
-
 		requestLogger.writeLog(req);
 		if(page != null) {
 			return page.getPath(); 			
