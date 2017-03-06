@@ -34,10 +34,10 @@ public class Logging {
 		return id;
 	}
 	public Date getReqtime() {
-		return reqtime;
+		return (Date) reqtime.clone();
 	}
 	public void setReqtime(Date reqtime) {
-		this.reqtime = reqtime;
+		this.reqtime = (Date) reqtime.clone();
 	}
 	public String getMethod() {
 		return method;

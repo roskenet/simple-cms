@@ -102,11 +102,11 @@ public class Page {
 	}
 
 	public Date getCreated() {
-		return created;
+		return (Date) created.clone(); 
 	}
 
 	public void setCreated(Date created) {
-		this.created = created;
+		this.created = (Date) created.clone();
 	}
 
 	public String getHeader() {
