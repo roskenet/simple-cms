@@ -36,7 +36,7 @@ public class PageController extends AbstractSCMSController {
 	public String page(final Model model, final HttpServletRequest req, final HttpSession session) {
 		final String fullPath = (String) req.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
 		
-		final Page page = pageRepository.findOne(filterSuffix(fullPath));
+		final Page page = pageRepository.findOne(PathHelper.filterSuffix(fullPath));
 		if (page != null) {
 			model.addAttribute("page", page);
 			
@@ -53,20 +53,10 @@ public class PageController extends AbstractSCMSController {
 		    return page.getTemplate();
 		}
 		else {
-			return "/page/" + filterSuffix(fullPath);
+			return "/page/" + PathHelper.filterSuffix(fullPath);
 		}
 	}
 
-	private String filterSuffix(final String fullPath) {
-//		return fullPath.substring(0, fullPath.lastIndexOf('.'));
-		Pattern pattern = Pattern.compile("/page/(.*?)\\.html");
-		Matcher matcher = pattern.matcher(fullPath);
-		
-		if(matcher.find()) {
-			String pageId = matcher.group(1);
-			return pageId;
-		}
-		return "";
-	}
+
 
 }
