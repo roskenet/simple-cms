@@ -52,7 +52,7 @@ public class ApiTagController extends AbstractSCMSController {
 			String pageId = matcher.group(1);
 			List<String> tagList = new ArrayList<>();
 
-			pageRepository.findOne(pageId).getTags().forEach(s -> tagList.add(s.getId()));
+			pageRepository.findById(pageId).get().getTags().forEach(s -> tagList.add(s.getId()));
 			return tagList;
 		}
 
