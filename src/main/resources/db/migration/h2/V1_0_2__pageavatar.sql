@@ -1,1 +1,0 @@
-ALTER TABLE page ADD COLUMN avatar VARCHAR(256);
