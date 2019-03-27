@@ -34,7 +34,7 @@ public class PageController extends AbstractSCMSController {
 	public String page(final Model model, final HttpServletRequest req, final HttpSession session) {
 		final String fullPath = (String) req.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
 		
-		final Page page = pageRepository.findById(PathHelper.filterSuffix(fullPath)).get();
+		final Page page = pageRepository.findById(PathHelper.filterSuffix(fullPath)).orElse(null);
 
 		if (page != null) {
 			model.addAttribute("page", page);
